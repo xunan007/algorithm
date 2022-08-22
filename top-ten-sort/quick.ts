@@ -13,17 +13,16 @@ function quick(nums: number[], low: number, high: number) {
 }
 
 function partition(nums: number[], low: number, high: number): number {
-    let i = low + 1;
-    let j = high;
+    // 为了让 i 和 j 能够正常的自增，这里要先让 i 和 j 外移
+    let i = low;
+    let j = high + 1;
     const pivot = nums[low];
     while (true) {
-        while (nums[i] < pivot) {
+        while (nums[++i] < pivot) {
             if (i === high) break;
-            else i++;
         }
-        while (nums[j] > pivot) {
+        while (nums[--j] > pivot) {
             if (j === low) break;
-            else j--;
         }
         if (i < j) swap(nums, i, j);
         else break; // 有可能会溢位，但无法避免
